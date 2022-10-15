@@ -1,12 +1,3 @@
-" Install vim-plug automatically
-" if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
-" 	echo "Downloading junegunn/vim-plug to manage plugins..."
-" 	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
-" 	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
-" 	autocmd VimEnter * PlugInstall
-" endif
-
-
 call plug#begin()
 Plug 'tpope/vim-surround'
 Plug 'preservim/nerdtree'
@@ -35,18 +26,13 @@ set mouse=a
 " Use Windows Clipboard
 set clipboard=unnamedplus
 set ignorecase
+" Keep a few lines on the top/bottom when scrolling.
 set scrolloff=7
 
 " Highlight current line
 set cursorline
 " Reminder to press enter key
 set colorcolumn=81
-
-" Shortcutting split navigation, saving a keypress:
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
 
 " Some basics:
 set nocompatible
@@ -114,8 +100,7 @@ xnoremap <A-Down>  :m'>+<CR>gv=gv
 set tabstop=4
 set shiftwidth=4
 set expandtab
-" set fileformat=dos
-"
+
 " ## Windows
 "
 " shellslash makes the fzm preview panel work correctly.
@@ -216,16 +201,18 @@ if &diff
 endif
 
 
-" Used to fix links when using the auto suggest featuer.
+" Used to fix links when using the auto suggest feature.
+" Convert the current line's slashes from / to \ and vice versa.
 nnoremap <silent> <Leader>/ :let tmp=@/<Bar>s:\\:/:ge<Bar>let @/=tmp<Bar>noh<CR>
 nnoremap <silent> <Leader><Bslash> :let tmp=@/<Bar>s:/:\\:ge<Bar>let @/=tmp<Bar>noh<CR>
 
 " Close all but the current buffer
 command! BufOnly silent! execute "%bd|e#|bd#"
 
-silent cd ~/Workspace/Notes
 " Get started and open vimwiki
+" Only does this if no args are provided to vim.
 function! SetupDefaultWorkspace()
+    silent cd ~/Workspace/Notes
     NERDTreeCWD
     wincmd l
     VimwikiIndex
@@ -233,6 +220,7 @@ endfunction
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") |  call SetupDefaultWorkspace() | endif
 
 " Make NERDTree only show your notes.
+" Pressing f in NERDTree toggles the hidden files.
 let NERDTreeIgnore=['\(\.md\|\.org\|\.txt\)\@<!$[[file]]']
 
 " Open CtrlP to the current working directory.
@@ -246,10 +234,9 @@ let g:ctrlp_cmd = 'CtrlPCurWD'
 " Opens quick notes and starts a new line at the end. It also moves the line
 " you are working on to the top.
 map <leader>qq :e ~/Workspace/Notes/0_JonathansNotebook/Quick Notes.md<CR>Go<CR><CR>##<space><Esc>zt<S-a>
-map <leader>qp :e ~/Workspace/Notes/1_Projects/index.md<CR>
-map <leader>qb :e ~/Workspace/Notes/2_Backlog/index.md<CR>
 set foldlevel=1
 
+" Make neovide look nice. Add fullscreen hotkey.
 if exists("g:neovide")
     " Allow Neovide Fullscreen
     function Neovide_fullscreen()
