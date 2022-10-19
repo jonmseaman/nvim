@@ -237,6 +237,7 @@ map <leader>qq :e ~/Workspace/Notes/0_JonathansNotebook/Quick Notes.md<CR>Go<CR>
 set foldlevel=1
 
 " Make neovide look nice. Add fullscreen hotkey.
+" Reference: https://neovide.dev/command-line-reference.html
 if exists("g:neovide")
     " Allow Neovide Fullscreen
     function Neovide_fullscreen()
