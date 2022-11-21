@@ -166,9 +166,9 @@ endif
 " Ensure files are read as what I want:
 	let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
  	let g:vimwiki_list = [
-         \ {'path': '~/Workspace/Notes', 'syntax': 'markdown', 'ext': '.md', 'diary_rel_path': 'Journal/'},
-         \ {'path': '~/Workspace/Notes/jonmseaman.github.io', 'syntax': 'markdown', 'ext': '.md'},
-         \ {'path': '~/Workspace/Notes/jonms.com', 'syntax': 'markdown', 'ext': '.md'},
+         \ {'path': '~/Notes', 'syntax': 'markdown', 'ext': '.md', 'diary_rel_path': 'Journal/'},
+         \ {'path': '~/Notes/jonmseaman.github.io', 'syntax': 'markdown', 'ext': '.md'},
+         \ {'path': '~/Notes/jonms.com', 'syntax': 'markdown', 'ext': '.md'},
          \ ]
 	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
 	autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
