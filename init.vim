@@ -9,7 +9,7 @@ Plug 'tpope/vim-commentary'
 Plug 'ap/vim-css-color'
 Plug 'djoshea/vim-autoread'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'axvr/org.vim'
+Plug 'jceb/vim-orgmode'
 
 Plug 'ryanoasis/vim-devicons'
 
