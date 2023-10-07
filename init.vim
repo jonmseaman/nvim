@@ -213,9 +213,6 @@ command! BufOnly silent! execute "%bd|e#|bd#"
 " Only does this if no args are provided to vim.
 function! SetupDefaultWorkspace()
     silent cd ~/Notes
-    NERDTreeCWD
-    wincmd l
-    VimwikiIndex
 endfunction
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") |  call SetupDefaultWorkspace() | endif
 
@@ -233,7 +230,7 @@ let g:ctrlp_cmd = 'CtrlPCurWD'
 " Make Quick Notes
 " Opens quick notes and starts a new line at the end. It also moves the line
 " you are working on to the top.
-map <leader>qq :e ~/Notes/0_Projects/Quick Notes.md<CR>Go<CR><CR>##<space><Esc>zt<S-a>
+map <leader>qq :e ~/Notes/Quick Notes.org<CR>Go<CR><CR>**<space><Esc>zt<S-a>
 set foldlevel=1
 
 " Make neovide look nice. Add fullscreen hotkey.
