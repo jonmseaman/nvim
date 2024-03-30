@@ -144,24 +144,11 @@ endif
         let NERDTreeBookmarksFile = '~/.vim' . '/NERDTreeBookmarks.md'
     endif
 
-" Replace ex mode with gq " TODO: Why would I want this?
-	"map Q gq
-
 " Check file in shellcheck:
 	map <leader>s :!clear && shellcheck -x %<CR>
 
 " Open my bibliography file in split
-	map <leader>b :vsp<space>$BIB<CR>
-	map <leader>r :vsp<space>$REFER<CR>
-
-" Compile document, be it groff/LaTeX/markdown/etc.
-	map <leader>c :w! \| !compiler "<c-r>%"<CR>
-
-" Open corresponding .pdf/.html or preview
-	map <leader>p :!opout <c-r>%<CR><CR>
-
-" Runs a script that cleans out tex build files whenever I close out of a .tex file.
-	autocmd VimLeave *.tex !texclear %
+	map <leader>b :vsp<space>~/Notes/bibliography.bib<CR>
 
 " Ensure files are read as what I want:
 	let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
@@ -170,36 +157,12 @@ endif
          \ {'path': '~/Notes/jonmseaman.github.io', 'syntax': 'markdown', 'ext': '.md'},
          \ {'path': '~/Notes/jonms.com', 'syntax': 'markdown', 'ext': '.md'},
          \ ]
-	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
-	autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
-	autocmd BufRead,BufNewFile *.tex set filetype=tex
     " Directory links should open index file
     let g:vimwiki_dir_link = 'index'
     let g:vimwiki_folding = 'expr'
 
 " Save file as sudo on files that require root permission
 	cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
-
-" Enable Goyo by default for mutt writing
-	autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
-	autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo
-	autocmd BufRead,BufNewFile /tmp/neomutt* map ZZ :Goyo\|x!<CR>
-	autocmd BufRead,BufNewFile /tmp/neomutt* map ZQ :Goyo\|q!<CR>
-
-" When shortcut files are updated, renew bash and ranger configs with new material:
-	autocmd BufWritePost bm-files,bm-dirs !shortcuts
-" Run xrdb whenever Xdefaults or Xresources are updated.
-	autocmd BufRead,BufNewFile Xresources,Xdefaults,xresources,xdefaults set filetype=xdefaults
-	autocmd BufWritePost Xresources,Xdefaults,xresources,xdefaults !xrdb %
-
-" Recompile dwmblocks on config edit.
-	autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid -f dwmblocks }
-
-" Turns off highlighting on the bits of code that are changed, so the line that is changed is highlighted but the actual text that has changed stands out on the line and is readable.
-if &diff
-    highlight! link DiffText MatchParen
-endif
-
 
 " Used to fix links when using the auto suggest feature.
 " Convert the current line's slashes from / to \ and vice versa.
@@ -208,13 +171,6 @@ nnoremap <silent> <Leader><Bslash> :let tmp=@/<Bar>s:/:\\:ge<Bar>let @/=tmp<Bar>
 
 " Close all but the current buffer
 command! BufOnly silent! execute "%bd|e#|bd#"
-
-" Get started and open vimwiki
-" Only does this if no args are provided to vim.
-function! SetupDefaultWorkspace()
-    silent cd ~/Notes
-endfunction
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") |  call SetupDefaultWorkspace() | endif
 
 " Make NERDTree only show your notes.
 " Pressing f in NERDTree toggles the hidden files.
@@ -231,7 +187,7 @@ let g:ctrlp_cmd = 'CtrlPCurWD'
 " Opens quick notes and starts a new line at the end. It also moves the line
 " you are working on to the top.
 map <leader>qq :e ~/Notes/Quick Notes.org<CR>Go<CR><CR>**<space><Esc>zt<S-a>
-set foldlevel=1
+set foldlevel=3
 
 " Make neovide look nice. Add fullscreen hotkey.
 " Reference: https://neovide.dev/command-line-reference.html
