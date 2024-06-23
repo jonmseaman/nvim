@@ -9,7 +9,7 @@ Plug 'tpope/vim-commentary'
 Plug 'ap/vim-css-color'
 Plug 'djoshea/vim-autoread'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'jceb/vim-orgmode'
+Plug 'nvim-orgmode/orgmode'
 
 Plug 'ryanoasis/vim-devicons'
 
@@ -205,3 +205,12 @@ if exists("g:neovide")
     let g:neovide_transparency=0.85
     let g:neovide_remember_window_size=v:false
 endif
+
+
+" Org setup
+lua << EOF
+require('orgmode').setup({
+  org_agenda_files = {'~/Notes/**'},
+  org_default_notes_file = '~/Notes/Quick Notes.org',
+})
+EOF
