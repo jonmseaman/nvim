@@ -101,25 +101,6 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
-" ## Windows
-"
-" shellslash makes the fzm preview panel work correctly.
-" It also allows the VimwikiCheckLinks command to work.
-" Disable this to run vim-plug
-" shellslash breaks the NERDTree open command. There is
-" apparently an unreleased fix to this issue, but I would
-" need to build the thing myself and that would suck really bad.
-if has("win32")
-  " set shellslash
-  " let $PATH = "C:\\Program Files\\Git\\usr\\bin;" . $PATH
-endif
-
-" Use the custom font with icons.
-if has("win32")
-    " Consolas:h12 gives emoji support.
-    set guifont=Consolas:h12
-endif
-
 " Goyo plugin makes text more readable when writing prose:
     map <leader>f :Goyo \| set linebreak<CR>
 " Spell-check set to <leader>o, 'o' for 'orthography':
@@ -186,26 +167,8 @@ let g:ctrlp_cmd = 'CtrlPCurWD'
 " Make Quick Notes
 " Opens quick notes and starts a new line at the end. It also moves the line
 " you are working on to the top.
-map <leader>qq :e ~/Notes/Quick Notes.org<CR>Go<CR><CR>**<space><Esc>zt<S-a>
+map <leader>qq :e ~/Notes/Quick Notes.org<CR>Go<Esc>zt<S-a>**<space>
 set foldlevel=3
-
-" Make neovide look nice. Add fullscreen hotkey.
-" Reference: https://neovide.dev/command-line-reference.html
-if exists("g:neovide")
-    " Allow Neovide Fullscreen
-    function Neovide_fullscreen()
-        if g:neovide_fullscreen == v:true
-            let g:neovide_fullscreen=v:false
-        else
-            let g:neovide_fullscreen=v:true
-        endif
-    endfunction
-    map <F11> :call Neovide_fullscreen()<cr>
-
-    let g:neovide_transparency=0.85
-    let g:neovide_remember_window_size=v:false
-endif
-
 
 " Org setup
 lua << EOF
